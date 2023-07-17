@@ -1,0 +1,40 @@
+.mia-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carousel {
+    overflow: hidden;
+    border: 2px solid black;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+}
+.carousel-btn {
+    display: flex;
+    justify-content: center;
+    column-gap: 3vw;
+}
+.carousel-btn-each {
+    background-color: greenyellow;
+    border: none;
+    width: 5vw;
+    height: 3vh;
+}
+.slide-container {
+    width: 60vw;
+    transition: all 1s;
+  }
+  .slide-box {
+    width: 20vw;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .slide-box img {
+    width: 100%;
+  } 
