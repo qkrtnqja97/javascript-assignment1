@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+html {
+    --primary-color: #1F2937;
+    --secondary-color: #F9FAF8;
+    --accent-color: #3882F6;
+    --primary-font-color: #FFF;
+    --secondary-font-color: #000;
+}
+
+.rock-paper-scissors {
+    font-family: 'Ubuntu',sans-serif;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    text-align: center;
+}
+
+.r-heading {
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+#scoreBox {
+    display:flex;
+    width:80vw;
+    justify-content: space-between;
+    margin:0 auto;
+}
+
+#scoreBox p {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+#game-content {
+    box-sizing: border-box;
+    width:80vw;
+    height:60vh;
+    margin:10px auto;
+    padding-top:5%;
+    text-align: center;
+    
+}
+
+select {
+    width: 200px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: #006fff;
+    border: 1px solid #006fff;
+    border-radius: 3px;
+    }
+
+
