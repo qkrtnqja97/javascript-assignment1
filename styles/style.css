@@ -5,27 +5,52 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-ul{
+nav {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    background-color: lightslategray;
+    align-items: center;
+    padding: 30px;
+}
+
+.pages {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
     gap: 20px;
-    list-style: none;
+    margin: auto;
+}
+
+.pages li {
+    padding: 5px;
+}
+
+.pages li:hover {
+    background-color: rgb(188, 212, 212);
+}
+
+body {
+    background-color: #cbd8e3;
 }
 
 a {
     color: black;
-}
-
-h1{
-    margin-bottom: 20px;
-}
+    text-decoration: none;
+}   
 
 section {
     display: flex;
-    flex-direction: column;
-    width: fit-content;
-    margin: 20px;
-    padding: 10px;
+    flex-direction: row;
+    width: 100vw;
+    height: 100%;
+}
+
+footer {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+    width: 100vw;
+    align-items: center;
     background-color: lightslategray;
-    border: 3px solid black;
 }
