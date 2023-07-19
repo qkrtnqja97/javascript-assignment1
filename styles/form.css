@@ -1,3 +1,9 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(202,216,227);
+}
 @media (min-width: 300px){
     .form-validation{
         display: flex;
@@ -5,7 +11,6 @@
         align-items: center;
     }
     .form-validation > .form {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         width: 80%;
         background-color: gainsboro;
         display: flex;
@@ -28,6 +33,7 @@
         cursor: pointer;
     }
     .form-validation div{
+        background-color: gainsboro;
         display: flex;
         flex-direction: column;
         row-gap: 4vh;
@@ -36,15 +42,19 @@
         display: flex;
         flex-direction: column;
         row-gap: 2vh;
+        background-color: gainsboro;
     }
     .form-validation input {
         width: 60vw;
         height: 5vh;
         border: none;
+        background-color: white;
+        padding-left: 2%;
     }
     .form-validation label {
         font-size: 15px;
         font-weight: 600;
+        background-color: gainsboro;
     }    
 }
 @media(min-width: 750px) {
