@@ -20,4 +20,4 @@ preName.addEventListener("click",function(){
     } else if(present ==1) {
         slideContainter.style.transform="translateX(0vw)"; 
     }
-})
+});
