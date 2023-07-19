@@ -12,7 +12,7 @@
     }
     .form-validation > .form {
         width: 80%;
-        background-color: gainsboro;
+        background-color: rgb(119,135,153);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -33,7 +33,7 @@
         cursor: pointer;
     }
     .form-validation div{
-        background-color: gainsboro;
+        background-color: rgb(119,135,153);
         display: flex;
         flex-direction: column;
         row-gap: 4vh;
@@ -42,7 +42,7 @@
         display: flex;
         flex-direction: column;
         row-gap: 2vh;
-        background-color: gainsboro;
+        background-color: rgb(119,135,153);
     }
     .form-validation input {
         width: 60vw;
@@ -54,7 +54,7 @@
     .form-validation label {
         font-size: 15px;
         font-weight: 600;
-        background-color: gainsboro;
+        background-color: rgb(119,135,153);
     }    
 }
 @media(min-width: 750px) {
