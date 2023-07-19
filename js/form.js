@@ -18,7 +18,7 @@ document.getElementsByClassName('login')[0].addEventListener('click',function(e)
         e.preventDefault;
         alert("Include at least 1 uppercase");
     } else {
-        document.getElementsByClassName('form')[0].innerHTML='<p>Login Success!</p>';
+        document.getElementsByClassName('form')[0].innerHTML='<p>😊Success!</p>';
 
         // alert("Thank you! Success to log in!");
     }
