@@ -13,7 +13,7 @@
   
   .carousel {
       overflow: hidden;
-      border: 2px solid black;
+      border: 5px solid black;
       width: 40vw;
       display: flex;
       flex-direction: column;
