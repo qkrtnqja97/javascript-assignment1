@@ -7,7 +7,7 @@
 
 :root {
     --color1: #aeb5bb;
-    --color2: lightslategray;
+    --color2: #778899;
 }
 
 .container {
@@ -37,6 +37,7 @@
     padding: 5px;
     border: 2px solid black;
     cursor: pointer;
+    user-select: none;
 } 
 
 [class*="dice"]:hover {
