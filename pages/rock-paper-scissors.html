@@ -14,14 +14,20 @@
             <p id="player2" class="score">0</p>
         </div>
         <h3>How many times do you want to play?</h3>
-        <select id="gameCount" onchange="changeGameCount()">
+        <select id="gameCount">
             <option value="3">3</option>
             <option value="5">5</option>
             <option value="7">7</option>
         </select>
+        <br>
+        <input type="radio" name="numberOfPlayer" value="single">Single
+        <input type="radio" name="numberOfPlayer" value="dual">dual
+        <br>
+        <button onclick="initGame()">START GAME!</button>
+        <div id="explanation"></div>
         <section id="game-content">
         </section>
-        <button onclick="playgame()">BATTLE!</button>
+        <button class="battle" onclick="playGame()">BATTLE!<br>(ENTER)</button>
 
 
         <script>
@@ -31,15 +37,140 @@
             var player1_pick;
             var player2_pick;
 
-            document.addEventListener('keydown', (event) => {
-                settingPicks(event.code);
-                console.log(player1_pick);
-                console.log(player2_pick);
-            });
+            function initGame(){
+                let numberOfPlayer = document.querySelector('input[name="numberOfPlayer"]:checked').value;
+                if (numberOfPlayer == 'Single'){
+                    singleGame();
+                }else{
+                    dualGame();
+                }
 
-            function settingPicks(code){
-                console.log(code);
-                switch(code){
+                //Reset the score
+                player1_score = 0;
+                player2_score = 0;
+                document.getElementById('player1').innerHTML = player1_score;
+                document.getElementById('player2').innerHTML = player2_score;
+
+                //Reset the layer
+                let parent = document.getElementById('game-content');
+                let gameCountSeletor = document.getElementById('gameCount');
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.firstChild);
+                }
+                totalNumber = parseInt(gameCountSeletor.options[gameCountSeletor.selectedIndex].value);
+                for (let i = 1; i <= totalNumber; i++){
+                    let div = document.createElement('div');
+                    getIdName(div,i);
+                    parent.appendChild(div);
+                }
+
+                //Set the circle on the bottom layer
+                getLeftCircle();
+                getRightCircle();
+            
+            }
+
+            function getIdName(div,number) {
+                let height_Percentage = parseInt(100 / totalNumber);
+                switch (number) {
+                    case(1):
+                        div.id = "first"
+                        div.className = "layer"
+                        break;
+                    case(2):
+                        div.id = "second"
+                        div.className = "layer"
+                        break;
+                    case(3):
+                        div.id = "third"
+                        div.className = "layer"
+                        break;
+                    case(3):
+                        div.id = "third"
+                        div.className = "layer"
+                        break;
+                    case(4):
+                        div.id = "fourth"
+                        div.className = "layer"
+                        break;
+                    case(5):
+                        div.id = "fifth"
+                        div.className = "layer"
+                        break;
+                    case(6):
+                        div.id = "sixth"
+                        div.className = "layer"
+                        break;
+                    case(7):
+                        div.id = "seventh"
+                        div.className = "layer"
+                        break;
+                }
+                div.style.height = height_Percentage + '%';
+                div.style.width = number * height_Percentage + '%';
+                div.style.margin = '0px auto';
+                div.style.background = 'white';
+            }
+
+            function getLeftCircle(){
+                let layer = get_circle_loc(player1_score);
+                let div = document.querySelector('#'+layer);
+                let circle = document.createElement('div');
+                circle.className = 'leftCircle';
+                circle.style.borderRadius = '70%';
+                circle.style.width = '50px';
+                circle.style.height = '50px';
+                circle.style.position = 'absolute';
+                console.log(div.offsetLeft);
+                circle.style.left = div.offsetLeft + 10 + 'px';
+                circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';
+                circle.style.backgroundColor = 'black';
+                document.getElementById('game-content').appendChild(circle);
+            }
+
+            function getRightCircle(){
+                let layer = get_circle_loc(player2_score);
+                let div = document.querySelector('#'+layer);
+                console.log(div);
+                let location = div.getBoundingClientRect();
+                let circle = document.createElement('div');
+                circle.className = 'rightCircle';
+                circle.style.borderRadius = '70%';
+                circle.style.width = '50px';
+                circle.style.height = '50px';
+                circle.style.position = 'absolute';
+                console.log(div.width);
+                console.log(typeof(div.width));
+                console.log(parseInt(div.width));
+                circle.style.left = div.offsetLeft + parseInt(div.offsetWidth) - 50 + 'px';
+                circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';;
+                circle.style.backgroundColor = 'black';
+                document.getElementById('game-content').appendChild(circle);
+            }
+
+            function get_circle_loc(score){
+                let number = totalNumber - score;
+                switch(number){
+                    case (1):
+                        return 'first'
+                    case (2):
+                        return 'second'
+                    case (3):
+                        return 'third'
+                    case (4):
+                        return 'fourth'
+                    case (5):
+                        return 'fifth'
+                    case (6):
+                        return 'sixth'
+                    case (7):
+                        return 'seventh'
+                }
+            }
+
+            function dualGame(){
+                document.addEventListener('keydown', (event) => {
+                switch(event.code){
                     case ("KeyA"):
                         player1_pick = "rock";
                         break;
@@ -59,12 +190,36 @@
                         player2_pick = "scissors";
                         break;
                     case('Enter'):
-                        playgame();
+                        playGame();
                         break;
                 }
+            });
+                let parent = document.getElementById('explanation');
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(parent.firstChild);
+                }
+                let player1_div = document.createElement('div');
+                player1_div.id = 'player1Ex'
+                let player1_h1 = document.createElement('h1');
+                player1_h1.innerHTML = 'Player1';
+                let player1_p = document.createElement('p')
+                player1_p.innerHTML = 'A -> Rock <br> S -> Paper <br> D -> Scissors';
+                player1_div.appendChild(player1_h1);
+                player1_div.appendChild(player1_p);
+                parent.appendChild(player1_div);
+                let player2_div = document.createElement('div');
+                player2_div.id = 'player2Ex';
+                let player2_h1 = document.createElement('h1');
+                player2_h1.innerHTML = 'Player2';
+                let player2_p = document.createElement('p')
+                player2_p.innerHTML = 'J -> Rock <br> K -> Paper <br> L -> Scissors';
+                player2_div.appendChild(player2_h1);
+                player2_div.appendChild(player2_p);
+                parent.appendChild(player2_div);
             }
+            
 
-            function playgame(){
+            function playGame(){
                 player1_score = parseInt(document.getElementById('player1').textContent);
                 player2_score = parseInt(document.getElementById('player2').textContent);
                 let pick1 = player1_pick;
@@ -113,131 +268,13 @@
                 replace_Circle();
             }
 
-            function changeGameCount(){
-                let parent = document.getElementById('game-content');
-                let gameCountSeletor = document.getElementById('gameCount');
-                while (parent.hasChildNodes()) {
-                    parent.removeChild(document.getElementById('game-content').firstChild);
-                }
-                totalNumber = parseInt(gameCountSeletor.options[gameCountSeletor.selectedIndex].value);
-                for (let i = 1; i <= totalNumber; i++){
-                    let div = document.createElement('div');
-                    getIdName(div,i);
-                    parent.appendChild(div);
-                }
-
-                player1_score = 0;
-                player2_score = 0;
-                document.getElementById('player1').innerHTML = player1_score;
-                document.getElementById('player2').innerHTML = player2_score;
-                getLeftCircle();
-                getRightCircle();
-            
-            }
-
             function replace_Circle(){
-                console.log(document.getElementsByClassName('leftCircle')[0]);
                 document.getElementsByClassName('leftCircle')[0].remove();
                 document.getElementsByClassName('rightCircle')[0].remove();
                 getLeftCircle();
                 getRightCircle();
             }
 
-            function get_circle_loc(score){
-                let number = totalNumber - score;
-                switch(number){
-                    case (1):
-                        return 'first'
-                    case (2):
-                        return 'second'
-                    case (3):
-                        return 'third'
-                    case (4):
-                        return 'fourth'
-                    case (5):
-                        return 'fifth'
-                    case (6):
-                        return 'sixth'
-                    case (7):
-                        return 'seventh'
-                }
-            }
-
-            function getIdName(div,number) {
-                let height_Percentage = parseInt(100 / totalNumber);
-                switch (number) {
-                    case(1):
-                        div.id = "first"
-                        div.className = "layer"
-                        break;
-                    case(2):
-                        div.id = "second"
-                        div.className = "layer"
-                        break;
-                    case(3):
-                        div.id = "third"
-                        div.className = "layer"
-                        break;
-                    case(3):
-                        div.id = "third"
-                        div.className = "layer"
-                        break;
-                    case(4):
-                        div.id = "fourth"
-                        div.className = "layer"
-                        break;
-                    case(5):
-                        div.id = "fifth"
-                        div.className = "layer"
-                        break;
-                    case(6):
-                        div.id = "sixth"
-                        div.className = "layer"
-                        break;
-                    case(7):
-                        div.id = "seventh"
-                        div.className = "layer"
-                        break;
-                }
-                div.style.height = height_Percentage + '%';
-                div.style.width = number * height_Percentage + '%';
-                div.style.margin = '0px auto';
-                div.style.background = 'white';
-            }
-
-            function getLeftCircle(){
-                let layer = get_circle_loc(player1_score);
-                let div = document.querySelector('#'+layer);
-                console.log(div);
-                let location = div.getBoundingClientRect();
-                let circle = document.createElement('div');
-                circle.className = 'leftCircle';
-                circle.style.borderRadius = '70%';
-                circle.style.width = '50px';
-                circle.style.height = '50px';
-                circle.style.position = 'absolute';
-                circle.style.left = location.left + 50 + 'px';
-                circle.style.top = location.top - 60 + 'px';
-                circle.style.backgroundColor = 'black';
-                document.getElementById('game-content').appendChild(circle);
-            }
-
-            function getRightCircle(){
-                let layer = get_circle_loc(player2_score);
-                let div = document.querySelector('#'+layer);
-                console.log(div);
-                let location = div.getBoundingClientRect();
-                let circle = document.createElement('div');
-                circle.className = 'rightCircle';
-                circle.style.borderRadius = '70%';
-                circle.style.width = '50px';
-                circle.style.height = '50px';
-                circle.style.position = 'absolute';
-                circle.style.left = location.right - 100 + 'px';
-                circle.style.top = location.top - 60 + 'px';
-                circle.style.backgroundColor = 'black';
-                document.getElementById('game-content').appendChild(circle);
-            }
         </script>
     </body>
 </html>

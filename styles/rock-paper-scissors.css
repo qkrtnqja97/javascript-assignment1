@@ -32,15 +32,6 @@ html {
     font-weight: bold;
 }
 
-#game-content {
-    box-sizing: border-box;
-    width:80vw;
-    height:60vh;
-    margin:10px auto;
-    padding-top:5%;
-    text-align: center;
-    
-}
 
 select {
     width: 200px;
@@ -50,6 +41,28 @@ select {
     color: #006fff;
     border: 1px solid #006fff;
     border-radius: 3px;
-    }
+}
 
+#explanation{
+    display:flex;
+    justify-content: space-between;
+    width: 70vw;
+    margin: 0 auto;
+}
+
+#game-content {
+    box-sizing: border-box;
+    width:80vw;
+    height:60vh;
+    margin:0px auto;
+    text-align: center;
+    
+}
+
+.battle {
+    width:200px;
+    height:100px;
+    font-size: 20px;
+    font-weight: bold;
+}
 
