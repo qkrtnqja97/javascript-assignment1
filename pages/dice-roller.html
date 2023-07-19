@@ -15,7 +15,10 @@
 
     <div class="container">
 
-        <div id="phc"><h1>Roll:</h1><p id="placeholder"></p></div>
+        <div id="phc">
+            <h1>Roll:</h1>
+            <p id="placeholder"></p>
+        </div>
 
         <div class="grid">
             <img class="dice1" src="../imgs/d4.png" onclick="go(d4)">
@@ -25,10 +28,18 @@
             <img class="dice5" src="../imgs/d12.png" onclick="go(d12)">
             <img class="dice6" src="../imgs/d20.png" onclick="go(d20)">
             <img class="dice7" src="../imgs/d100.png" onclick="go(d100)">
-            <div class="dice8"></div>
+            <div id="multi">
+                <img onclick="mtplr()" src="../imgs/plus.png" height="20px">
+                <div id="mbox">
+                    <p id="ecs">x</p>
+                    <span id="multiplier">1</span>
+                </div>
+                <img onclick="reset()" id="reload" src="../imgs/reload.png" height="20px">
+            </div>
         </div>
 
     </div>
+
     <a href="../index.html" style="margin-left: 30px;">back</a>
 
     <script src="../js/dice-roller.js" async defer></script>
