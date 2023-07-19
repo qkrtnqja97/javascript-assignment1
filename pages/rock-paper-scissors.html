@@ -9,10 +9,6 @@
     </head>
     <body class="rock-paper-scissors">
         <h1 class="r-heading">ROCK-PAPER-SCISSORS</h1>
-        <div id="scoreBox">
-            <p id="player1" class="score">0</p>
-            <p id="player2" class="score">0</p>
-        </div>
         <h3>How many times do you want to play?</h3>
         <select id="gameCount">
             <option value="3">3</option>
@@ -25,6 +21,10 @@
         <br>
         <button onclick="initGame()">START GAME!</button>
         <div id="explanation"></div>
+        <div id="scoreBox">
+            <p id="player1" class="score">0</p>
+            <p id="player2" class="score">0</p>
+        </div>
         <section id="game-content">
         </section>
         <button class="battle" onclick="playGame()">BATTLE!<br>(ENTER)</button>
@@ -33,6 +33,7 @@
         <script>
             var player1_score = parseInt(document.getElementById('player1').textContent);
             var player2_score = parseInt(document.getElementById('player2').textContent);
+            var keyEventController = false;
             var totalNumber;
             var player1_pick;
             var player2_pick;
@@ -57,7 +58,7 @@
                 while (parent.hasChildNodes()) {
                     parent.removeChild(parent.firstChild);
                 }
-                totalNumber = parseInt(gameCountSeletor.options[gameCountSeletor.selectedIndex].value);
+                totalNumber = parseInt(gameCountSeletor.options[gameCountSeletor.selectedIndex].value) + 1;
                 for (let i = 1; i <= totalNumber; i++){
                     let div = document.createElement('div');
                     getIdName(div,i);
@@ -105,6 +106,9 @@
                         div.id = "seventh"
                         div.className = "layer"
                         break;
+                    case(8):
+                        div.id = "eigth"
+                        div.className = "layer"
                 }
                 div.style.height = height_Percentage + '%';
                 div.style.width = number * height_Percentage + '%';
@@ -131,7 +135,6 @@
             function getRightCircle(){
                 let layer = get_circle_loc(player2_score);
                 let div = document.querySelector('#'+layer);
-                console.log(div);
                 let location = div.getBoundingClientRect();
                 let circle = document.createElement('div');
                 circle.className = 'rightCircle';
@@ -139,11 +142,15 @@
                 circle.style.width = '50px';
                 circle.style.height = '50px';
                 circle.style.position = 'absolute';
-                console.log(div.width);
-                console.log(typeof(div.width));
-                console.log(parseInt(div.width));
                 circle.style.left = div.offsetLeft + parseInt(div.offsetWidth) - 50 + 'px';
                 circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';;
+                if (player2_score >= totalNumber-1){
+                    console.log('end');
+                    circle.style.width = '100px';
+                    circle.style.height = '100px';
+                    circle.style.left = circle.style.left = div.offsetLeft + parseInt(div.offsetWidth)/2 - 50 + 'px';
+                    circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';;
+                }
                 circle.style.backgroundColor = 'black';
                 document.getElementById('game-content').appendChild(circle);
             }
@@ -165,35 +172,40 @@
                         return 'sixth'
                     case (7):
                         return 'seventh'
+                    case (8):
+                        return 'eigth'
                 }
             }
 
-            function dualGame(){
-                document.addEventListener('keydown', (event) => {
-                switch(event.code){
-                    case ("KeyA"):
-                        player1_pick = "rock";
-                        break;
-                    case ('KeyS'):
-                        player1_pick = "paper";
-                        break;
-                    case('KeyD'):
-                        player1_pick = "scissors";
-                        break;
-                    case ('KeyJ'):
-                        player2_pick = "rock";
-                        break;
-                    case ('KeyK'):
-                        player2_pick = "paper";
-                        break;
-                    case('KeyL'):
-                        player2_pick = "scissors";
-                        break;
-                    case('Enter'):
-                        playGame();
-                        break;
+            function dualGame(){          
+                if (keyEventController == false){
+                    document.addEventListener('keydown', (event) => {
+                        switch(event.code){
+                            case ("KeyA"):
+                                player1_pick = "rock";
+                                break;
+                            case ('KeyS'):
+                                player1_pick = "paper";
+                                break;
+                            case('KeyD'):
+                                player1_pick = "scissors";
+                                break;
+                            case ('KeyJ'):
+                                player2_pick = "rock";
+                                break;
+                            case ('KeyK'):
+                                player2_pick = "paper";
+                                break;
+                            case('KeyL'):
+                                player2_pick = "scissors";
+                                break;
+                            case('Enter'):
+                                playGame();
+                                break;
+                        }
+                    });
+                    keyEventController = true;
                 }
-            });
                 let parent = document.getElementById('explanation');
                 while (parent.hasChildNodes()) {
                     parent.removeChild(parent.firstChild);
@@ -218,12 +230,12 @@
                 parent.appendChild(player2_div);
             }
             
-
             function playGame(){
                 player1_score = parseInt(document.getElementById('player1').textContent);
                 player2_score = parseInt(document.getElementById('player2').textContent);
                 let pick1 = player1_pick;
                 let pick2 = player2_pick;
+                console.log('gmae Start');
                 if (pick1 == 'rock'){
                     if(pick2 == 'scissors'){
                         document.getElementById('player1').innerText = (player1_score+1);
@@ -232,7 +244,6 @@
                     else if (pick2 == 'paper'){
                         document.getElementById('player1').innerText = (player1_score-1);
                         document.getElementById('player2').innerText = (player2_score+1);
-                        console.log('end');
                     }
                 }
                 else if (pick1 == 'scissors'){
@@ -266,6 +277,21 @@
                 player1_score = parseInt(document.getElementById('player1').textContent);
                 player2_score = parseInt(document.getElementById('player2').textContent);
                 replace_Circle();
+                if (player1_score >= totalNumber-1){
+                    document.getElementById('player1').innerText = totalNumber-1;
+                    alert('player1 Win');
+                    player1_score = 0;
+                    player2_score = 0;
+                }
+                else if (player2_score >= totalNumber-1){
+                    document.getElementById('player2').innerText = totalNumber-1;
+                    alert('player2 Win');
+                    player1_score = 0;
+                    player2_score = 0;
+                }
+                else{
+                    replace_Circle();
+                }
             }
 
             function replace_Circle(){
