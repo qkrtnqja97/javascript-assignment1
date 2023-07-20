@@ -5,6 +5,10 @@
     font-family: arial;
 }
 
+body {
+    background-color: #cbd8e3;
+}
+
 :root {
     --color1: #aeb5bb;
     --color2: #778899;
