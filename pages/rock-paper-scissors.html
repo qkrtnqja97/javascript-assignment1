@@ -128,6 +128,13 @@
                 console.log(div.offsetLeft);
                 circle.style.left = div.offsetLeft + 10 + 'px';
                 circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';
+                if (player1_score >= totalNumber-1){
+                    console.log('end');
+                    circle.style.width = '100px';
+                    circle.style.height = '100px';
+                    circle.style.left = circle.style.left = div.offsetLeft + parseInt(div.offsetWidth)/2 - 50 + 'px';
+                    circle.style.top = div.offsetTop - parseInt(circle.style.height) + 'px';;
+                }
                 circle.style.backgroundColor = 'black';
                 document.getElementById('game-content').appendChild(circle);
             }
