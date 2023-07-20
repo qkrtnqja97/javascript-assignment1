@@ -17,10 +17,11 @@ document.getElementsByClassName('login')[0].addEventListener('click',function(e)
     } else if(/[A-Z]/.test(passwordInput) == false){
         e.preventDefault;
         alert("Include at least 1 uppercase");
+    } else if(/[0-9]/.test(passwordInput) == false){
+        e.preventDefault;
+        alert("Include at least 1 number");
     } else {
         document.getElementsByClassName('form')[0].innerHTML='<p style="background-color: rgb(119,134,153); font-size:30px;">😊Success!</p>';
-
-        // alert("Thank you! Success to log in!");
     }
 
 
