@@ -40,6 +40,7 @@
 
             function initGame(){
                 let numberOfPlayer = document.querySelector('input[name="numberOfPlayer"]:checked').value;
+                document.getElementsByClassName('battle')[0].style.display = 'none';
                 if (numberOfPlayer == 'single'){
                     singleGame();
                 }else{
@@ -130,13 +131,13 @@
                 rock_button.id = 'rock';
                 choiceBtn_set(rock_button);
                 let paper_button = document.createElement('button');
-                paper_button.id = 'paper;'
+                paper_button.id = 'paper'
                 choiceBtn_set(paper_button);
                 let scissors_button = document.createElement('button');
                 scissors_button.id = 'scissors';
                 choiceBtn_set(scissors_button);
                 parent.style.marginTop = '15px';
-                parent.style.marginBottom = '5px';
+                parent.style.marginBottom = '20px';
                 parent.appendChild(rock_button);
                 parent.appendChild(paper_button);
                 parent.appendChild(scissors_button);
@@ -148,9 +149,28 @@
                 button.innerHTML = button.id;
                 button.addEventListener('click',function(){
                     player1_pick = button.id;
-                    console.log(player1_pick);
-                })
+                    computerPick();
+                    playGame();
+                });
             }
+
+            function computerPick(){
+                randomChoice(Math.floor(Math.random()*(3-1)+1));
+            }
+
+            function randomChoice(random){
+                console.log(random);
+                if(random == 1){
+                    player2_pick = 'rock';
+                }
+                else if(random == 2){
+                    player2_pick = 'paper';
+                }
+                else {
+                    player2_pick = 'scissors';
+                }
+            }
+
             function getLeftCircle(){
                 let layer = get_circle_loc(player1_score);
                 let div = document.querySelector('#'+layer);
@@ -276,6 +296,7 @@
                 player2_div.appendChild(player2_h1);
                 player2_div.appendChild(player2_p);
                 parent.appendChild(player2_div);
+                document.getElementsByClassName('battle')[0].style.display = 'block';
             }
     
             function playGame(){
