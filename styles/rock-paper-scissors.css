@@ -60,8 +60,8 @@ select {
 }
 
 .battle {
-    width:200px;
-    height:100px;
+    width:300px;
+    height:80px;
     font-size: 20px;
     font-weight: bold;
 }
