@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../styles/rock-paper-scissors.css">
+        <title>Rock-Paper-Scissors</title>
+    </head>
+    <body class="rock-paper-scissors">
+        <h1 class="r-heading">ROCK-PAPER-SCISSORS</h1>
+        <div id="scoreBox">
+            <p id="player1" class="score">0</p>
+            <p id="player2" class="score">0</p>
+        </div>
+        <h3>How many times do you want to play?</h3>
+        <select id="gameCount" onchange="changeGameCount()">
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="7">7</option>
+        </select>
+        <section id="game-content">
+        </section>
+        <button onclick="playgame()">BATTLE!</button>
+
+
+        <script>
+            var player1_score = parseInt(document.getElementById('player1').textContent);
+            var player2_score = parseInt(document.getElementById('player2').textContent);
+            var totalNumber;
+            var player1_pick;
+            var player2_pick;
+
+            document.addEventListener('keydown', (event) => {
+                settingPicks(event.code);
+                console.log(player1_pick);
+                console.log(player2_pick);
+            });
+
+            function settingPicks(code){
+                console.log(code);
+                switch(code){
+                    case ("KeyA"):
+                        player1_pick = "rock";
+                        break;
+                    case ('KeyS'):
+                        player1_pick = "paper";
+                        break;
+                    case('KeyD'):
+                        player1_pick = "scissors";
+                        break;
+                    case ('KeyJ'):
+                        player2_pick = "rock";
+                        break;
+                    case ('KeyK'):
+                        player2_pick = "paper";
+                        break;
+                    case('KeyL'):
+                        player2_pick = "scissors";
+                        break;
+                    case('Enter'):
+                        playgame();
+                        break;
+                }
+            }
+
+            function playgame(){
+                player1_score = parseInt(document.getElementById('player1').textContent);
+                player2_score = parseInt(document.getElementById('player2').textContent);
+                let pick1 = player1_pick;
+                let pick2 = player2_pick;
+                if (pick1 == 'rock'){
+                    if(pick2 == 'scissors'){
+                        document.getElementById('player1').innerText = (player1_score+1);
+                        document.getElementById('player2').innerText = (player2_score-1);
+                    }
+                    else if (pick2 == 'paper'){
+                        document.getElementById('player1').innerText = (player1_score-1);
+                        document.getElementById('player2').innerText = (player2_score+1);
+                        console.log('end');
+                    }
+                }
+                else if (pick1 == 'scissors'){
+                    if (pick2 == 'paper'){
+                        document.getElementById('player1').innerText = (player1_score+1);
+                        document.getElementById('player2').innerText = (player2_score-1);
+                    }
+                    else if(pick2 == 'rock'){
+                        document.getElementById('player1').innerText = (player1_score-1);
+                        document.getElementById('player2').innerText = (player2_score+1);
+                    }
+                }
+                else{
+                    if (pick2 == 'rock'){
+                        document.getElementById('player1').innerText = (player1_score+1);
+                        document.getElementById('player2').innerText = (player2_score-1);
+                    }
+                    else if(pick2 == 'scissors'){
+                        document.getElementById('player1').innerText = (player1_score-1);
+                        document.getElementById('player2').innerText = (player2_score+1);
+                    }
+                }
+                player1_score = parseInt(document.getElementById('player1').textContent);
+                player2_score = parseInt(document.getElementById('player2').textContent);
+                if (player1_score < 0){
+                    document.getElementById('player1').innerText = 0;
+                }
+                if (player2_score < 0){
+                    document.getElementById('player2').innerText = 0;
+                }
+                player1_score = parseInt(document.getElementById('player1').textContent);
+                player2_score = parseInt(document.getElementById('player2').textContent);
+                replace_Circle();
+            }
+
+            function changeGameCount(){
+                let parent = document.getElementById('game-content');
+                let gameCountSeletor = document.getElementById('gameCount');
+                while (parent.hasChildNodes()) {
+                    parent.removeChild(document.getElementById('game-content').firstChild);
+                }
+                totalNumber = parseInt(gameCountSeletor.options[gameCountSeletor.selectedIndex].value);
+                for (let i = 1; i <= totalNumber; i++){
+                    let div = document.createElement('div');
+                    getIdName(div,i);
+                    parent.appendChild(div);
+                }
+
+                player1_score = 0;
+                player2_score = 0;
+                document.getElementById('player1').innerHTML = player1_score;
+                document.getElementById('player2').innerHTML = player2_score;
+                getLeftCircle();
+                getRightCircle();
+            
+            }
+
+            function replace_Circle(){
+                console.log(document.getElementsByClassName('leftCircle')[0]);
+                document.getElementsByClassName('leftCircle')[0].remove();
+                document.getElementsByClassName('rightCircle')[0].remove();
+                getLeftCircle();
+                getRightCircle();
+            }
+
+            function get_circle_loc(score){
+                let number = totalNumber - score;
+                switch(number){
+                    case (1):
+                        return 'first'
+                    case (2):
+                        return 'second'
+                    case (3):
+                        return 'third'
+                    case (4):
+                        return 'fourth'
+                    case (5):
+                        return 'fifth'
+                    case (6):
+                        return 'sixth'
+                    case (7):
+                        return 'seventh'
+                }
+            }
+
+            function getIdName(div,number) {
+                let height_Percentage = parseInt(100 / totalNumber);
+                switch (number) {
+                    case(1):
+                        div.id = "first"
+                        div.className = "layer"
+                        break;
+                    case(2):
+                        div.id = "second"
+                        div.className = "layer"
+                        break;
+                    case(3):
+                        div.id = "third"
+                        div.className = "layer"
+                        break;
+                    case(3):
+                        div.id = "third"
+                        div.className = "layer"
+                        break;
+                    case(4):
+                        div.id = "fourth"
+                        div.className = "layer"
+                        break;
+                    case(5):
+                        div.id = "fifth"
+                        div.className = "layer"
+                        break;
+                    case(6):
+                        div.id = "sixth"
+                        div.className = "layer"
+                        break;
+                    case(7):
+                        div.id = "seventh"
+                        div.className = "layer"
+                        break;
+                }
+                div.style.height = height_Percentage + '%';
+                div.style.width = number * height_Percentage + '%';
+                div.style.margin = '0px auto';
+                div.style.background = 'white';
+            }
+
+            function getLeftCircle(){
+                let layer = get_circle_loc(player1_score);
+                let div = document.querySelector('#'+layer);
+                console.log(div);
+                let location = div.getBoundingClientRect();
+                let circle = document.createElement('div');
+                circle.className = 'leftCircle';
+                circle.style.borderRadius = '70%';
+                circle.style.width = '50px';
+                circle.style.height = '50px';
+                circle.style.position = 'absolute';
+                circle.style.left = location.left + 50 + 'px';
+                circle.style.top = location.top - 60 + 'px';
+                circle.style.backgroundColor = 'black';
+                document.getElementById('game-content').appendChild(circle);
+            }
+
+            function getRightCircle(){
+                let layer = get_circle_loc(player2_score);
+                let div = document.querySelector('#'+layer);
+                console.log(div);
+                let location = div.getBoundingClientRect();
+                let circle = document.createElement('div');
+                circle.className = 'rightCircle';
+                circle.style.borderRadius = '70%';
+                circle.style.width = '50px';
+                circle.style.height = '50px';
+                circle.style.position = 'absolute';
+                circle.style.left = location.right - 100 + 'px';
+                circle.style.top = location.top - 60 + 'px';
+                circle.style.backgroundColor = 'black';
+                document.getElementById('game-content').appendChild(circle);
+            }
+        </script>
+    </body>
+</html>
