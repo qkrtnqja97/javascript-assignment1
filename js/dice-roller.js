@@ -1,5 +1,5 @@
 const audio = new Audio();
-const sfx = ["../audio/dice0.mp3", "../audio/dice1.mp3", "../audio/dice2.mp3","../audio/dice3.mp3", "../audio/dice4.mp3"];
+const sfx = ["audio/dice0.mp3", "audio/dice1.mp3", "audio/dice2.mp3","audio/dice3.mp3", "audio/dice4.mp3", "audio/dice5.mp3"];
 var llor = 0;
 
 function mtplr(){
